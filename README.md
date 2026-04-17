@@ -56,7 +56,7 @@ A dataset named “geoip” is imported into the environment and used to map IP 
 
 This allows events, such as login attempts or attacks, to be enriched with location details for better visibility and analysis.
 
-[Download GeoIP Dataset](./geoip-summarized.csv)
+[GeoIP Dataset](./geoip-summarized.csv)
 
 ---
 ### 6. Querying the Log Repository with KQL
