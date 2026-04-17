@@ -31,5 +31,49 @@ With both the firewall disabled and NSG fully open, the virtual machine became f
 
 ---
 
-### 3. Viewing Raw Logs on the Virtual Machine
+### 3. Viewing Raw Logs on the VM
 
+
+
+
+---
+
+### 4. Connecting the VM to Log Analytics Workspace
+
+Connecting the virtual machine to a Log Analytics workspace in Microsoft Azure enables centralized collection of system and security data.
+
+An agent is installed on the VM to send logs, performance metrics, and event data to the workspace. This allows monitoring, querying, and analysis of activity such as login attempts, system changes, and network events.
+
+The connection supports visibility into the VM and is commonly used for threat detection, auditing, and troubleshooting.
+
+---
+
+### 5. Uploading Geolocation Data to the SIEM
+
+Uploading geolocation data to the SIEM in Microsoft Azure adds location context to collected log data.
+
+A dataset named “geoip” is imported into the environment and used to map IP addresses to geographic locations such as country, region, and city. This data can then be joined with existing logs in the Log Analytics workspace.
+
+This allows events, such as login attempts or attacks, to be enriched with location details for better visibility and analysis.
+
+---
+### 6. Querying the Log Repository with KQL
+
+Querying the log repository with KQL (Kusto Query Language) in Microsoft Azure allows structured analysis of collected log data.
+
+KQL is used to search, filter, and sort data from sources such as security events, sign-in logs, and system activity stored in the Log Analytics workspace. Queries can isolate specific behaviors, such as failed login attempts or unusual network activity.
+
+This process enables efficient investigation, pattern detection, and extraction of actionable insights from large volumes of log data.
+
+**Query used to locate events:**
+
+```kql
+let GeoIPDB_FULL = _GetWatchlist("geoip");
+let WindowsEvents = SecurityEvent;
+WindowsEvents | where EventID == 4625
+| order by TimeGenerated desc
+| evaluate ipv4_lookup(GeoIPDB_FULL, IpAddress, network)
+| summarize FailureCount = count() by IpAddress, latitude, longitude, cityname, countryname
+| project FailureCount, AttackerIp = IpAddress, latitude, longitude, city = cityname, country = countryname,
+friendly_location = strcat(cityname, " (", countryname, ")");
+```
