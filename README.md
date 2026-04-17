@@ -31,5 +31,5 @@ With both the firewall disabled and NSG fully open, the virtual machine became f
 
 ---
 
-### 2. Viewing Raw Logs on the Virtual Machine
+### 3. Viewing Raw Logs on the Virtual Machine
 
