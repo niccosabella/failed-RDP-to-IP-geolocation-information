@@ -50,11 +50,11 @@ The connection supports visibility into the VM and is commonly used for threat d
 
 ### 5. Uploading Geolocation Data to the SIEM
 
-Uploading geolocation data to the SIEM in Microsoft Azure adds location context to collected log data.
+Uploading geolocation data to the SIEM in Microsoft Azure adds location context to security events.
 
-A dataset named “geoip” is imported into the environment and used to map IP addresses to geographic locations such as country, region, and city. This data can then be joined with existing logs in the Log Analytics workspace.
+A watchlist named “geoip” is imported into the environment and used to map source IP addresses to geographic data such as city, country, latitude, and longitude. This data is then matched against failed logon events in the Log Analytics workspace by using KQL.
 
-This allows events, such as login attempts or attacks, to be enriched with location details for better visibility and analysis.
+This allows failed RDP attempts and other security events to be enriched with geographic details for improved analysis, investigation, and visualization.
 
 [GeoIP Dataset](./geoip-summarized.csv)
 
