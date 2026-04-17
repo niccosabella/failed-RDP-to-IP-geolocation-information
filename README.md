@@ -29,3 +29,7 @@ Inbound and outbound rules were set to allow all ports, all protocols, and all s
 
 With both the firewall disabled and NSG fully open, the virtual machine became fully exposed to external traffic. This setup supports security testing, vulnerability scanning, and monitoring of unsolicited connection attempts.
 
+---
+
+### 2. Viewing Raw Logs on the Virtual Machine
+
